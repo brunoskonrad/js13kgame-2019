@@ -4,18 +4,39 @@ initKeys();
 
 const BASE_SIZE = 50;
 
-let platforms = [
-  createPlatform(0, 750),
-  createPlatform(50, 750),
-  createPlatform(100, 750),
-  createPlatform(150, 750),
-  createPlatform(200, 750),
-  createPlatform(250, 750),
-  createPlatform(300, 750),
-  createPlatform(350, 750)
+const MAP = [
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
-last = platforms[platforms.length - 1];
+let platforms = [];
+
+function loadMap(theMap) {
+  theMap.forEach((row, columnIndex) => {
+    row.forEach((item, rowIndex) => {
+      if (item === 1) {
+        console.log(rowIndex, columnIndex);
+        platforms.push(createPlatform(rowIndex * 50, columnIndex * 50));
+      }
+    });
+  });
+}
+
+loadMap(MAP);
 
 function createPlatform(x = 0, y = 0) {
   return Sprite({
@@ -32,7 +53,7 @@ const player = Sprite({
   type: "player",
   x: 350,
   y: 600,
-  color: "red",
+  color: "salmon",
   width: BASE_SIZE,
   height: BASE_SIZE,
   dy: 5,
@@ -56,9 +77,8 @@ const player = Sprite({
     }
 
     const collided =
-      platforms.filter(platform =>
-        checkCollisionWithPlatform(this, platform)
-      ).length > 0;
+      platforms.filter(platform => checkCollisionWithPlatform(this, platform))
+        .length > 0;
 
     if (collided) {
       this.dy = 0;
@@ -70,11 +90,12 @@ const player = Sprite({
 
 function checkCollisionWithPlatform(player, platform) {
   const playerBottomY = player.y + player.height;
-  const MVP_playerRight = player.x + player.width;
 
   if (
     playerBottomY >= platform.y &&
-    (MVP_playerRight > platform.x && player.x < platform.x + platform.width)
+    playerBottomY < platform.y + 10 &&
+    (player.x + player.width > platform.x &&
+      player.x < platform.x + platform.width)
   ) {
     // player.dy = 0;
     return true;

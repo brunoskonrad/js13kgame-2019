@@ -1,4 +1,5 @@
 import typescript from "rollup-plugin-typescript";
+import { string } from "rollup-plugin-string";
 import compiler from "@ampproject/rollup-plugin-closure-compiler";
 
 export default {
@@ -8,5 +9,11 @@ export default {
     format: "iife",
     name: "bundle"
   },
-  plugins: [typescript(), compiler()]
+  plugins: [
+    typescript(),
+    compiler(),
+    string({
+      include: "**/*.map"
+    })
+  ]
 };

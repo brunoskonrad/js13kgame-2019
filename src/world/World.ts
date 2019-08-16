@@ -3,6 +3,7 @@ import { createPlayer } from "../player/player";
 
 import { handlePlayerCollisionWithPlatform } from "./handlePlayerCollisionWithPlatform";
 import { handlePlayerCollisionWithBorders } from "./handlePlayerCollisionWithBorders";
+import { parseMap, parsePlatforms } from "../mapParser";
 
 const GRAVITY = 10;
 
@@ -15,15 +16,11 @@ export default class World {
   }
 
   loadMap(theMap) {
-    this.platforms = [];
+    const pieces = parseMap(theMap);
+    console.log("pieces", pieces);
 
-    theMap.forEach((row, columnIndex) => {
-      row.forEach((item, rowIndex) => {
-        if (item === 1) {
-          this.platforms.push(createPlatform(rowIndex * 50, columnIndex * 50));
-        }
-      });
-    });
+    this.platforms = parsePlatforms(pieces);
+    console.log(this.platforms);
   }
 
   update(dt) {

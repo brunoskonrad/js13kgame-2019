@@ -1,14 +1,12 @@
 import Sprite from "kontra/src/sprite";
 
-const BASE_SIZE = 50;
-
-export function createPlatform(x = 0, y = 0) {
+export function createPlatform(x = 0, y = 0, width = 50, height = 50) {
   return Sprite({
     x,
     y,
+    width,
+    height,
     type: "platform",
-    width: BASE_SIZE,
-    height: BASE_SIZE,
     color: "darkgray"
   });
 }

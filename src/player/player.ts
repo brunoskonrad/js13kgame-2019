@@ -20,6 +20,9 @@ export function createPlayer() {
     moveLeft() {
       this.dx = -5;
     },
+    jump() {
+      this.dy = -5;
+    },
     update() {
       handlePlayerInput(this);
       this.advance();

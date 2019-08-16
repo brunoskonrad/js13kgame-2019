@@ -1,8 +1,8 @@
 import { keyPressed } from "kontra/src/keyboard";
 
 export function handlePlayerInput(player) {
-  if (keyPressed("up")) {
-    player.dy = -5;
+  if (keyPressed("space")) {
+    player.jump();
   }
 
   if (keyPressed("right")) {

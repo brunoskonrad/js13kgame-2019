@@ -8,8 +8,8 @@ const BASE_SIZE = 50;
 export function createPlayer() {
   return Sprite({
     type: "player",
-    x: 350,
-    y: 300,
+    x: 9999,
+    y: 9999,
     color: "salmon",
     width: BASE_SIZE,
     height: BASE_SIZE,
@@ -26,7 +26,7 @@ export function createPlayer() {
       if (this.isOnFloor && !this.isJumping) {
         this.isOnFloor = false;
         this.isJumping = true;
-        this.dy = -7.5;
+        this.dy = -13;
       }
     },
     update(dt) {

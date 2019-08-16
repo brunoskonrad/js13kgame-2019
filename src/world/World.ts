@@ -5,7 +5,7 @@ import { handlePlayerCollisionWithPlatform } from "./handlePlayerCollisionWithPl
 import { handlePlayerCollisionWithBorders } from "./handlePlayerCollisionWithBorders";
 import { parseMap, parsePlatforms } from "../mapParser";
 
-const GRAVITY = 10;
+const GRAVITY = 20;
 
 export default class World {
   platforms: any[];
@@ -19,6 +19,10 @@ export default class World {
     const pieces = parseMap(theMap);
 
     this.platforms = parsePlatforms(pieces);
+
+    const playerPosition = pieces.find(piece => piece.tileType === 8);
+    this.player.x = playerPosition.x;
+    this.player.y = playerPosition.y;
   }
 
   update(dt) {

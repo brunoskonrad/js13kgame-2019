@@ -19,4 +19,8 @@ export function handlePlayerInput(player) {
   ) {
     player.dx = 0;
   }
+
+  if (keyPressed("shift") && player.isJumping) {
+    console.log("welp");
+  }
 }

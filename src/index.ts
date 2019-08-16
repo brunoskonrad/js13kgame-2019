@@ -2,7 +2,7 @@ import { init } from "kontra/src/core";
 import { initKeys, keyMap } from "kontra/src/keyboard";
 import GameLoop from "kontra/src/gameLoop";
 
-import World from "./World";
+import World from "./world/World";
 
 init();
 

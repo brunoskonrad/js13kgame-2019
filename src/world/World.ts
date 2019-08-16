@@ -1,12 +1,15 @@
-import { createPlatform } from "./platform";
-import { createPlayer } from "./player/player";
+import { createPlatform } from "../platform";
+import { createPlayer } from "../player/player";
+
+import { handlePlayerCollisionWithPlatform } from "./handlePlayerCollisionWithPlatform";
+import { handlePlayerCollisionWithBorders } from "./handlePlayerCollisionWithBorders";
 
 export default class World {
   platforms: any[];
   player: any;
 
   constructor() {
-    this.player = createPlayer(this);
+    this.player = createPlayer();
   }
 
   loadMap(theMap) {
@@ -23,6 +26,8 @@ export default class World {
 
   update() {
     this.player.update();
+    handlePlayerCollisionWithPlatform(this);
+    handlePlayerCollisionWithBorders(this);
   }
 
   render() {

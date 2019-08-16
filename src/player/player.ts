@@ -9,7 +9,7 @@ export function createPlayer() {
   return Sprite({
     type: "player",
     x: 350,
-    y: 600,
+    y: 300,
     color: "salmon",
     width: BASE_SIZE,
     height: BASE_SIZE,

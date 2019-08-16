@@ -17,10 +17,8 @@ export default class World {
 
   loadMap(theMap) {
     const pieces = parseMap(theMap);
-    console.log("pieces", pieces);
 
     this.platforms = parsePlatforms(pieces);
-    console.log(this.platforms);
   }
 
   update(dt) {

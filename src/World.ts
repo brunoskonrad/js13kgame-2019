@@ -1,7 +1,13 @@
 import { createPlatform } from "./platform";
+import { createPlayer } from "./player/player";
 
 export default class World {
   platforms: any[];
+  player: any;
+
+  constructor() {
+    this.player = createPlayer(this);
+  }
 
   loadMap(theMap) {
     this.platforms = [];
@@ -15,9 +21,12 @@ export default class World {
     });
   }
 
-  update() {}
+  update() {
+    this.player.update();
+  }
 
   render() {
     this.platforms.forEach(platform => platform.render());
+    this.player.render();
   }
 }

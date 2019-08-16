@@ -1,8 +1,8 @@
 import { init } from "kontra/src/core";
 import { initKeys, keyMap } from "kontra/src/keyboard";
 import GameLoop from "kontra/src/gameLoop";
+
 import World from "./World";
-import { createPlayer } from "./player/player";
 
 init();
 
@@ -34,16 +34,12 @@ const MAP = [
 const world = new World();
 world.loadMap(MAP);
 
-const player = createPlayer(world);
-
 const game = GameLoop({
   update: function() {
     world.update();
-    player.update();
   },
   render: function() {
     world.render();
-    player.render();
   }
 });
 

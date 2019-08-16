@@ -1,5 +1,4 @@
 import Sprite from "kontra/src/sprite";
-import GameObject from "./GameObject";
 
 const BASE_SIZE = 50;
 

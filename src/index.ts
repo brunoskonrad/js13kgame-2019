@@ -35,8 +35,8 @@ const world = new World();
 world.loadMap(MAP);
 
 const game = GameLoop({
-  update: function() {
-    world.update();
+  update: function(d) {
+    world.update(d);
   },
   render: function() {
     world.render();

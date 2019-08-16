@@ -14,6 +14,7 @@ export function createPlayer() {
     width: BASE_SIZE,
     height: BASE_SIZE,
     dy: 5,
+    isOnFloor: false,
     moveRight() {
       this.dx = 5;
     },
@@ -23,7 +24,7 @@ export function createPlayer() {
     jump() {
       this.dy = -5;
     },
-    update() {
+    update(dt) {
       handlePlayerInput(this);
       this.advance();
     }

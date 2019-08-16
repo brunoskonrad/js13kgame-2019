@@ -4,6 +4,8 @@ import { createPlayer } from "../player/player";
 import { handlePlayerCollisionWithPlatform } from "./handlePlayerCollisionWithPlatform";
 import { handlePlayerCollisionWithBorders } from "./handlePlayerCollisionWithBorders";
 
+const GRAVITY = 10;
+
 export default class World {
   platforms: any[];
   player: any;
@@ -24,8 +26,15 @@ export default class World {
     });
   }
 
-  update() {
-    this.player.update();
+  update(dt) {
+    this.player.update(dt);
+
+    if (!this.player.isOnFloor) {
+      this.player.dy += GRAVITY * dt;
+    } else {
+      this.player.dy = 0;
+    }
+
     handlePlayerCollisionWithPlatform(this);
     handlePlayerCollisionWithBorders(this);
   }

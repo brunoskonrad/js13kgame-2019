@@ -1,10 +1,16 @@
 import { init } from "kontra/src/core";
-import { initKeys, keyPressed } from "kontra/src/keyboard";
+import { initKeys, keyMap, keyPressed } from "kontra/src/keyboard";
 import Sprite from "kontra/src/sprite";
 import GameLoop from "kontra/src/gameLoop";
+import World from "./World";
 
 const { canvas } = init();
+
+// Keyboard setup
 initKeys();
+keyMap[87] = "up";
+keyMap[68] = "right";
+keyMap[65] = "left";
 
 const BASE_SIZE = 50;
 
@@ -27,19 +33,21 @@ const MAP = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
-let platforms = [];
+// let platforms = [];
 
-function loadMap(theMap) {
-  theMap.forEach((row, columnIndex) => {
-    row.forEach((item, rowIndex) => {
-      if (item === 1) {
-        platforms.push(createPlatform(rowIndex * 50, columnIndex * 50));
-      }
-    });
-  });
-}
+// function loadMap(theMap) {
+//   platforms = [];
 
-loadMap(MAP);
+//   theMap.forEach((row, columnIndex) => {
+//     row.forEach((item, rowIndex) => {
+//       if (item === 1) {
+//         platforms.push(createPlatform(rowIndex * 50, columnIndex * 50));
+//       }
+//     });
+//   });
+// }
+
+// loadMap(MAP);
 
 function createPlatform(x = 0, y = 0) {
   return Sprite({
@@ -55,11 +63,10 @@ function createPlatform(x = 0, y = 0) {
 const player = Sprite({
   type: "player",
   x: 350,
-  y: 600,
+  y: 700,
   color: "salmon",
   width: BASE_SIZE,
   height: BASE_SIZE,
-  dy: 5,
   moveRight() {
     this.dx = 5;
   },
@@ -80,8 +87,9 @@ const player = Sprite({
     }
 
     const collided =
-      platforms.filter(platform => checkCollisionWithPlatform(this, platform))
-        .length > 0;
+      world.platforms.filter(platform =>
+        checkCollisionWithPlatform(this, platform)
+      ).length > 0;
 
     if (collided) {
       this.dy = 0;
@@ -125,15 +133,22 @@ function handlePlayerInput(player) {
   }
 }
 
+const world = new World();
+world.loadMap(MAP);
+
 const game = GameLoop({
   update: function() {
     handlePlayerInput(player);
+    world.update();
     player.update();
   },
   render: function() {
     player.render();
-    platforms.forEach(platform => platform.render());
+    world.render();
   }
 });
 
 game.start();
+
+window.world = world;
+window.player = player;

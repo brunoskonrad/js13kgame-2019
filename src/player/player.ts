@@ -23,7 +23,7 @@ export function createPlayer() {
       this.dx = -5;
     },
     jump() {
-      if (!this.isJumping) {
+      if (this.isOnFloor && !this.isJumping) {
         this.isOnFloor = false;
         this.isJumping = true;
         this.dy = -7.5;

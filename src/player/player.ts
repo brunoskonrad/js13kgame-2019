@@ -1,6 +1,9 @@
 import { getCanvas } from "kontra/src/core";
 import Sprite from "kontra/src/sprite";
 
+import { handleCollisionWithPlatform } from "./handleCollisionWithPlatform";
+import { handlePlayerInput } from "./handlePlayerInput";
+
 const BASE_SIZE = 50;
 
 export function createPlayer(world) {
@@ -19,6 +22,7 @@ export function createPlayer(world) {
       this.dx = -5;
     },
     update() {
+      handlePlayerInput(this);
       this.advance();
 
       if (this.x + this.width > getCanvas().width) {
@@ -33,7 +37,7 @@ export function createPlayer(world) {
 
       const collided =
         world.platforms.filter(platform =>
-          checkCollisionWithPlatform(this, platform)
+          handleCollisionWithPlatform(this, platform)
         ).length > 0;
 
       if (collided) {
@@ -43,17 +47,4 @@ export function createPlayer(world) {
       }
     }
   });
-}
-
-function checkCollisionWithPlatform(player, platform) {
-  const playerBottomY = player.y + player.height;
-
-  if (
-    playerBottomY >= platform.y &&
-    playerBottomY < platform.y + 10 &&
-    (player.x + player.width > platform.x &&
-      player.x < platform.x + platform.width)
-  ) {
-    return true;
-  }
 }

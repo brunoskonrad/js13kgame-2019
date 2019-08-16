@@ -1,7 +1,7 @@
-import Platform from "./Platform";
+import { createPlatform } from "./platform";
 
 export default class World {
-  platforms: Platform[];
+  platforms: any[];
 
   loadMap(theMap) {
     this.platforms = [];
@@ -9,7 +9,7 @@ export default class World {
     theMap.forEach((row, columnIndex) => {
       row.forEach((item, rowIndex) => {
         if (item === 1) {
-          this.platforms.push(new Platform(rowIndex * 50, columnIndex * 50));
+          this.platforms.push(createPlatform(rowIndex * 50, columnIndex * 50));
         }
       });
     });

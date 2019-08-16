@@ -5,6 +5,7 @@
   "main": "game.js",
   "scripts": {
     "build": "rollup -c",
+    "dev": "npm run build -- -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,9 +20,9 @@
   },
   "homepage": "https://github.com/brunoskonrad/js13kgame-2019#readme",
   "devDependencies": {
+    "@ampproject/rollup-plugin-closure-compiler": "^0.10.0",
     "rollup": "^1.19.4",
     "rollup-plugin-typescript": "^1.0.1",
-    "rollup-plugin-uglify": "^6.0.2",
     "tslib": "^1.10.0",
     "typescript": "^3.5.3"
   },

@@ -1,5 +1,5 @@
 import typescript from "rollup-plugin-typescript";
-import { uglify } from "rollup-plugin-uglify";
+import compiler from '@ampproject/rollup-plugin-closure-compiler';
 
 export default {
   input: "./src/index.ts",
@@ -8,5 +8,5 @@ export default {
     format: "iife",
     name: "bundle"
   },
-  plugins: [typescript()]
+  plugins: [typescript(), compiler()]
 };

@@ -27,3 +27,5 @@ const game = GameLoop({
 });
 
 game.start();
+
+window.world = world;

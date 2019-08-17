@@ -2,10 +2,12 @@ import { getCanvas } from "kontra/src/core";
 import Sprite from "kontra/src/sprite";
 
 import { handlePlayerInput } from "./handlePlayerInput";
+import Rewind from "../Rewind";
+import { createMagicPlatform } from "../magicPlatform";
 
 const BASE_SIZE = 50;
 
-export function createPlayer() {
+export function createPlayer(world) {
   return Sprite({
     type: "player",
     x: 9999,
@@ -16,6 +18,7 @@ export function createPlayer() {
     dy: 5,
     isOnFloor: false,
     isJumping: false,
+    rewind: new Rewind(),
     moveRight() {
       this.dx = 5;
     },
@@ -29,9 +32,24 @@ export function createPlayer() {
         this.dy = -13;
       }
     },
+    createMagicPlatform() {
+      if (this.rewind.hasSteps) {
+        const { position } = this.rewind.lastStep;
+
+        world.addMagicPlatform(createMagicPlatform(position.x, position.y));
+      }
+    },
     update(dt) {
       handlePlayerInput(this);
       this.advance();
+
+      if (this.isJumping) {
+        this.rewind.add(this.x, this.y);
+      }
+
+      if (this.isOnFloor) {
+        this.rewind.clear();
+      }
     }
   });
 }

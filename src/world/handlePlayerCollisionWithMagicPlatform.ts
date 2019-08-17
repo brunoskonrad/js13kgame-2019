@@ -1,13 +1,11 @@
 export function handlePlayerCollisionWithMagicPlatform(world) {
   const collided =
-    world.platforms.filter(platform =>
+    world.magicPlatforms.filter(platform =>
       detectCollisionBetweenPlayerAndPlatform(world.player, platform)
     ).length > 0;
 
   if (collided) {
     world.player.dy = 0;
-  } else {
-    world.player.dy = 5;
   }
 }
 

@@ -4,15 +4,17 @@ import { createPlayer } from "../player/player";
 import { handlePlayerCollisionWithPlatform } from "./handlePlayerCollisionWithPlatform";
 import { handlePlayerCollisionWithBorders } from "./handlePlayerCollisionWithBorders";
 import { parseMap, parsePlatforms } from "../mapParser";
+import { handlePlayerCollisionWithMagicPlatform } from "./handlePlayerCollisionWithMagicPlatform";
 
 const GRAVITY = 20;
 
 export default class World {
-  platforms: any[];
+  platforms: any[] = [];
+  magicPlatforms: any[] = [];
   player: any;
 
   constructor() {
-    this.player = createPlayer();
+    this.player = createPlayer(this);
   }
 
   loadMap(theMap) {
@@ -25,7 +27,14 @@ export default class World {
     this.player.y = playerPosition.y;
   }
 
+  addMagicPlatform(sprite) {
+    if (this.magicPlatforms.length === 0) {
+      this.magicPlatforms.push(sprite);
+    }
+  }
+
   update(dt) {
+    this.magicPlatforms.forEach(magicPlatform => magicPlatform.update());
     this.player.update(dt);
 
     if (!this.player.isOnFloor) {
@@ -36,10 +45,12 @@ export default class World {
 
     handlePlayerCollisionWithPlatform(this);
     handlePlayerCollisionWithBorders(this);
+    handlePlayerCollisionWithMagicPlatform(this);
   }
 
   render() {
     this.platforms.forEach(platform => platform.render());
+    this.magicPlatforms.forEach(magicPlatform => magicPlatform.render());
     this.player.render();
   }
 }

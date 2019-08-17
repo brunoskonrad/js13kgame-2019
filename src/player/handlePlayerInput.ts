@@ -21,6 +21,11 @@ export function handlePlayerInput(player) {
   }
 
   if (keyPressed("shift") && player.isJumping) {
-    console.log("welp");
+    if (player.rewind.hasSteps) {
+      player.x = player.rewind.steps[0].position.x;
+      player.y = player.rewind.steps[0].position.y;
+
+      player.createMagicPlatform();
+    }
   }
 }

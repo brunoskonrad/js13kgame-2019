@@ -5,8 +5,7 @@ import { handlePlayerCollisionWithPlatform } from "./handlePlayerCollisionWithPl
 import { handlePlayerCollisionWithBorders } from "./handlePlayerCollisionWithBorders";
 import { parseMap, parsePlatforms } from "../mapParser";
 import { handlePlayerCollisionWithMagicPlatform } from "./handlePlayerCollisionWithMagicPlatform";
-
-const GRAVITY = 20;
+import { GRAVITY } from "../constants";
 
 export default class World {
   platforms: any[] = [];

@@ -4,8 +4,7 @@ import Sprite from "kontra/src/sprite";
 import { handlePlayerInput } from "./handlePlayerInput";
 import Rewind from "../Rewind";
 import { createMagicPlatform } from "../magicPlatform";
-
-const BASE_SIZE = 50;
+import { BASE_SIZE } from "../constants";
 
 export function createPlayer(world) {
   return Sprite({
@@ -29,7 +28,7 @@ export function createPlayer(world) {
       if (this.isOnFloor && !this.isJumping) {
         this.isOnFloor = false;
         this.isJumping = true;
-        this.dy = -13;
+        this.dy = -8;
       }
     },
     createMagicPlatform() {

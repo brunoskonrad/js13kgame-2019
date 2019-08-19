@@ -1,4 +1,5 @@
 import { createPlatform } from "./platform";
+import { BASE_SIZE } from "./constants";
 
 export type MapPieces = {
   tileType: number;
@@ -10,8 +11,6 @@ export type MapPieces = {
 
 export const NOTHING_TYPE = 0;
 export const PLATFORM_TYPE = 1;
-
-const PIECE_SIZE = 50;
 
 export function parseMap(rawMap: string) {
   const lines = rawMap.trim().split("\n");
@@ -72,10 +71,10 @@ class Piece {
   get mapPieces(): MapPieces {
     return {
       tileType: Number(this.type),
-      x: this.x * PIECE_SIZE,
-      y: this.y * PIECE_SIZE,
-      width: this.quantity * PIECE_SIZE,
-      height: PIECE_SIZE
+      x: this.x * BASE_SIZE,
+      y: this.y * BASE_SIZE,
+      width: this.quantity * BASE_SIZE,
+      height: BASE_SIZE
     };
   }
 }

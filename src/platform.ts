@@ -1,6 +1,14 @@
 import Sprite from "kontra/src/sprite";
+import { BASE_SIZE } from "./constants";
 
-export function createPlatform(x = 0, y = 0, width = 50, height = 50) {
+BASE_SIZE;
+
+export function createPlatform(
+  x = 0,
+  y = 0,
+  width = BASE_SIZE,
+  height = BASE_SIZE
+) {
   return Sprite({
     x,
     y,

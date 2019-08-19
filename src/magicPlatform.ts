@@ -1,6 +1,5 @@
 import Sprite from "kontra/src/sprite";
-
-const BASE_SIZE = 50;
+import { BASE_SIZE } from "./constants";
 
 export function createMagicPlatform(x = 0, y = 0) {
   return Sprite({

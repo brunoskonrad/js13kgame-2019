@@ -5,6 +5,7 @@ import { handlePlayerInput } from "./handlePlayerInput";
 import Rewind from "../Rewind";
 import { createMagicPlatform } from "../magicPlatform";
 import { BASE_SIZE } from "../constants";
+import { delay } from "../utils/delay";
 
 export function createPlayer(world) {
   return Sprite({
@@ -17,7 +18,7 @@ export function createPlayer(world) {
     dy: 5,
     isOnFloor: false,
     isJumping: false,
-    rewind: new Rewind(),
+    rewinder: new Rewind(),
     moveRight() {
       this.dx = 5;
     },
@@ -32,23 +33,33 @@ export function createPlayer(world) {
       }
     },
     createMagicPlatform() {
-      if (this.rewind.hasSteps) {
-        const { position } = this.rewind.lastStep;
+      if (this.rewinder.hasSteps) {
+        const { position } = this.rewinder.lastStep;
 
-        world.addMagicPlatform(createMagicPlatform(position.x, position.y));
+        world.addMagicPlatform(
+          createMagicPlatform(position.x, position.y + this.height)
+        );
       }
     },
+    rewind: delay(function() {
+      if (this.rewinder.hasSteps) {
+        this.x = this.rewinder.steps[0].position.x;
+        this.y = this.rewinder.steps[0].position.y;
+
+        this.createMagicPlatform();
+      }
+    }, 3000),
     update(dt) {
       handlePlayerInput(this);
 
       if (this.isJumping) {
-        this.rewind.add(this.x, this.y);
+        this.rewinder.add(this.x, this.y);
       }
 
       this.advance();
 
       if (this.isOnFloor) {
-        this.rewind.clear();
+        this.rewinder.clear();
       }
     }
   });

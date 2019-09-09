@@ -1,4 +1,3 @@
-import { createPlatform } from "../platform";
 import { createPlayer } from "../player/player";
 
 import { handlePlayerCollisionWithPlatform } from "./handlePlayerCollisionWithPlatform";
@@ -26,10 +25,12 @@ export default class World {
     this.player.y = playerPosition.y;
   }
 
+  get collisionElements() {
+    return [...this.platforms, ...this.magicPlatforms];
+  }
+
   addMagicPlatform(sprite) {
-    if (this.magicPlatforms.length === 0) {
-      this.magicPlatforms.push(sprite);
-    }
+    this.magicPlatforms.push(sprite);
   }
 
   update(dt) {

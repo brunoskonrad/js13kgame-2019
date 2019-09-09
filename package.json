@@ -32,6 +32,6 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "kontra": "^6.2.3"
+    "kontra": "^6.5.0"
   }
 }

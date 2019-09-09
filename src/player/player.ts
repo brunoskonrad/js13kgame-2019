@@ -3,7 +3,7 @@ import Sprite from "kontra/src/sprite";
 import { handlePlayerInput } from "./handlePlayerInput";
 import Rewind from "../Rewind";
 import { createMagicPlatform } from "../magicPlatform";
-import { BASE_SIZE } from "../constants";
+import { BASE_SIZE, PLATFORM_CASTING_DELAY } from "../constants";
 import { delay } from "../utils/delay";
 
 export function createPlayer(world) {
@@ -39,7 +39,7 @@ export function createPlayer(world) {
         this.y = position.y;
         this.createMagicPlatform();
       }
-    }, 3000),
+    }, PLATFORM_CASTING_DELAY),
     createMagicPlatform() {
       if (this.rewinder.hasSteps) {
         const { position } = this.rewinder.lastStep;

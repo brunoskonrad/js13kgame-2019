@@ -35,6 +35,7 @@ export default class World {
   }
 
   update(dt) {
+    this.magicPlatforms = this.magicPlatforms.filter(magicPlatform => magicPlatform.exists);
     this.magicPlatforms.forEach(magicPlatform => magicPlatform.update());
     this.player.update(dt);
 

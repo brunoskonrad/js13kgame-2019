@@ -32,6 +32,15 @@ export function createPlayer(world) {
         this.dy = -8;
       }
     },
+    rewind: delay(function() {
+      if (this.rewinder.hasSteps) {
+        const { position } = this.rewinder.firstStep;
+
+        this.x = position.x;
+        this.y = position.y;
+        this.createMagicPlatform();
+      }
+    }, 3000),
     createMagicPlatform() {
       if (this.rewinder.hasSteps) {
         const { position } = this.rewinder.lastStep;
@@ -41,14 +50,6 @@ export function createPlayer(world) {
         );
       }
     },
-    rewind: delay(function() {
-      if (this.rewinder.hasSteps) {
-        this.x = this.rewinder.steps[0].position.x;
-        this.y = this.rewinder.steps[0].position.y;
-
-        this.createMagicPlatform();
-      }
-    }, 3000),
     update(dt) {
       handlePlayerInput(this);
 

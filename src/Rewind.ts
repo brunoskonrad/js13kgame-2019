@@ -21,7 +21,11 @@ export default class Rewind {
     return this.steps.length > 0;
   }
 
-  get lastStep() {
+  get firstStep(): RewindStep {
+    return this.steps[0];
+  }
+
+  get lastStep(): RewindStep {
     return this.steps[this.steps.length - 1];
   }
 }

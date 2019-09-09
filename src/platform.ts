@@ -15,6 +15,26 @@ export function createPlatform(
     width,
     height,
     type: "platform",
-    color: "darkgray"
+    color: "darkgray",
+    leftCollisionTimeout: null,
+    leftCollision() {
+      if (!this.leftCollisionTimeout) {
+        this.color = "green";
+        this.leftCollisionTimeout = setTimeout(() => {
+          this.color = "darkgray";
+          this.leftCollisionTimeout = null;
+        }, 2000);
+      }
+    },
+    rightCollisionTimeout: null,
+    rightCollision() {
+      if (!this.rightCollisionTimeout) {
+        this.color = "yellow";
+        this.rightCollisionTimeout = setTimeout(() => {
+          this.color = "darkgray";
+          this.rightCollisionTimeout = null;
+        }, 2000);
+      }
+    }
   });
 }

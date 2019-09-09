@@ -9,8 +9,8 @@ import { BASE_SIZE } from "../constants";
 export function createPlayer(world) {
   return Sprite({
     type: "player",
-    x: 9999,
-    y: 9999,
+    x: 0,
+    y: 0,
     color: "salmon",
     width: BASE_SIZE,
     height: BASE_SIZE,
@@ -40,11 +40,12 @@ export function createPlayer(world) {
     },
     update(dt) {
       handlePlayerInput(this);
-      this.advance();
 
       if (this.isJumping) {
         this.rewind.add(this.x, this.y);
       }
+
+      this.advance();
 
       if (this.isOnFloor) {
         this.rewind.clear();

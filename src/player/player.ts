@@ -1,4 +1,3 @@
-import { getCanvas } from "kontra/src/core";
 import Sprite from "kontra/src/sprite";
 
 import { handlePlayerInput } from "./handlePlayerInput";

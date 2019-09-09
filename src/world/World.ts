@@ -3,13 +3,14 @@ import { createPlayer } from "../player/player";
 import { handlePlayerCollisionWithPlatform } from "./handlePlayerCollisionWithPlatform";
 import { handlePlayerCollisionWithBorders } from "./handlePlayerCollisionWithBorders";
 import { parseMap, parsePlatforms } from "../mapParser";
-import { handlePlayerCollisionWithMagicPlatform } from "./handlePlayerCollisionWithMagicPlatform";
 import { GRAVITY } from "../constants";
+import Camera from "./Camera";
 
 export default class World {
   platforms: any[] = [];
   magicPlatforms: any[] = [];
   player: any;
+  camera: Camera = new Camera();
 
   constructor() {
     this.player = createPlayer(this);

@@ -45,7 +45,6 @@ export default class World {
 
     handlePlayerCollisionWithPlatform(this);
     handlePlayerCollisionWithBorders(this);
-    handlePlayerCollisionWithMagicPlatform(this);
   }
 
   render() {

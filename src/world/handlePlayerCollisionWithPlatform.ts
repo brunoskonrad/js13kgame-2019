@@ -22,7 +22,7 @@ export function handlePlayerCollisionWithPlatform(world) {
 
       if (didCollideLeft) {
         platform.leftCollision();
-        player.x = platform.x;
+        player.x = platform.x - player.width;
         player.dx = player.dx * -1;
         break;
       }
@@ -36,12 +36,10 @@ export function handlePlayerCollisionWithPlatform(world) {
 
       // find out what is the direction
       if (isBelow) {
-        // console.log("Below");
         player.y = platform.y + player.height;
         player.dx = 0;
         player.dy = 0;
       } else {
-        // console.log("Above");
         player.y = platform.y - player.height;
         player.isOnFloor = true;
         player.isJumping = false;

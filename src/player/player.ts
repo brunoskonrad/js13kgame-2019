@@ -18,6 +18,9 @@ export function createPlayer(world) {
     isOnFloor: false,
     isJumping: false,
     isRewinding: false,
+    canRewind() {
+      return this.isJumping
+    },
     rewindPosition: null,
     rewinder: new Rewind(this),
     moveRight() {
@@ -72,7 +75,7 @@ export function createPlayer(world) {
 
       handlePlayerInput(this);
 
-      if (this.isJumping) {
+      if (this.canRewind()) {
         this.rewinder.add(this.x, this.y);
       }
 

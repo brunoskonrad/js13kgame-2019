@@ -1,7 +1,7 @@
 import Sprite from "kontra/src/sprite";
 
 import { handlePlayerInput } from "./handlePlayerInput";
-import Rewind from "../Rewind";
+import Rewind from "./Rewind";
 import { createMagicPlatform } from "../magicPlatform";
 import { BASE_SIZE, PLATFORM_CASTING_DELAY } from "../constants";
 import { delay } from "../utils/delay";
@@ -17,7 +17,8 @@ export function createPlayer(world) {
     dy: 5,
     isOnFloor: false,
     isJumping: false,
-    rewinder: new Rewind(),
+    isRewinding: false,
+    rewinder: new Rewind(this),
     moveRight() {
       this.dx = 5;
     },
@@ -29,14 +30,13 @@ export function createPlayer(world) {
         this.isOnFloor = false;
         this.isJumping = true;
         this.dy = -8;
+
+        this.rewinder.clear();
       }
     },
     rewind: delay(function() {
-      if (this.rewinder.hasSteps) {
-        const { position } = this.rewinder.firstStep;
-
-        this.x = position.x;
-        this.y = position.y;
+      if (this.rewinder.hasSteps && !this.isRewinding) {
+        this.isRewinding = true;
         this.createMagicPlatform();
       }
     }, PLATFORM_CASTING_DELAY),
@@ -50,6 +50,21 @@ export function createPlayer(world) {
       }
     },
     update(dt) {
+      if (this.isRewinding) {
+        const previousStep = this.rewinder.previousStep
+
+        if (previousStep) {
+          this.x = previousStep.position.x;
+          this.y = previousStep.position.y;  
+
+          this.advance();
+          return;
+        }
+
+        console.log('Rewind Finished');
+        this.isRewinding = false;
+      }
+
       handlePlayerInput(this);
 
       if (this.isJumping) {
@@ -61,6 +76,6 @@ export function createPlayer(world) {
       if (this.isOnFloor) {
         this.rewinder.clear();
       }
-    }
+    },
   });
 }

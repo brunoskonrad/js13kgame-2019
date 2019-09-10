@@ -6,6 +6,11 @@ interface RewindStep {
 
 export default class Rewind {
   steps: RewindStep[] = [];
+  player: any;
+
+  constructor(player: any) {
+    this.player = player;
+  }
 
   clear() {
     this.steps = [];
@@ -27,5 +32,13 @@ export default class Rewind {
 
   get lastStep(): RewindStep {
     return this.steps[this.steps.length - 1];
+  }
+
+  get previousStep() {
+    if (this.hasSteps) {
+      return this.steps.pop()
+    }
+
+    return;
   }
 }

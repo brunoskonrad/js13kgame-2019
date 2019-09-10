@@ -44,7 +44,10 @@ export function createPlayer(world) {
     createMagicPlatform() {
       if (this.rewindPosition) {
         world.addMagicPlatform(
-          createMagicPlatform(this.rewindPosition.x, this.rewindPosition.y + this.height)
+          createMagicPlatform(
+            this.rewindPosition.x,
+            this.rewindPosition.y + this.height
+          )
         );
 
         this.rewindPosition = null;
@@ -52,11 +55,12 @@ export function createPlayer(world) {
     },
     update(dt) {
       if (this.isRewinding) {
-        const previousStep = this.rewinder.previousStep
+        this.rewinder.previousStep;
+        const previousStep = this.rewinder.previousStep;
 
         if (previousStep) {
           this.x = previousStep.position.x;
-          this.y = previousStep.position.y;  
+          this.y = previousStep.position.y;
 
           this.advance();
           return;
@@ -77,6 +81,6 @@ export function createPlayer(world) {
       if (this.isOnFloor) {
         this.rewinder.clear();
       }
-    },
+    }
   });
 }

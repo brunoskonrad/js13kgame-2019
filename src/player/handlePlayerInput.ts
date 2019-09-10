@@ -1,7 +1,7 @@
 import { keyPressed } from "kontra/src/keyboard";
 
 export function handlePlayerInput(player) {
-  if (keyPressed("space")) {
+  if (keyPressed("space") || keyPressed("up")) {
     player.jump();
   }
 
@@ -20,7 +20,7 @@ export function handlePlayerInput(player) {
     player.dx = 0;
   }
 
-  if (keyPressed("shift") && player.isJumping) {
+  if (keyPressed("shift") && !player.isOnFloor) {
     player.rewind();
   }
 }

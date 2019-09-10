@@ -1,9 +1,11 @@
+import { on } from "kontra/src/events";
+
 import { createPlayer } from "../player/player";
 
 import { handlePlayerCollisionWithPlatform } from "./handlePlayerCollisionWithPlatform";
 import { handlePlayerCollisionWithBorders } from "./handlePlayerCollisionWithBorders";
 import { parseMap, parsePlatforms } from "../mapParser";
-import { GRAVITY } from "../constants";
+import { GRAVITY, GAME_EVENT_MAGIC_PLATFORM_GONE } from "../constants";
 import Camera from "./Camera";
 
 export default class World {
@@ -14,6 +16,8 @@ export default class World {
 
   constructor() {
     this.player = createPlayer(this);
+
+    on(GAME_EVENT_MAGIC_PLATFORM_GONE, this.removeOldMagicPlatforms);
   }
 
   loadMap(theMap) {
@@ -30,12 +34,15 @@ export default class World {
     return [...this.platforms, ...this.magicPlatforms];
   }
 
+  removeOldMagicPlatforms = () => {
+    this.magicPlatforms = this.magicPlatforms.filter(magicPlatform => magicPlatform.exists);
+  }
+
   addMagicPlatform(sprite) {
     this.magicPlatforms.push(sprite);
   }
 
   update(dt) {
-    this.magicPlatforms = this.magicPlatforms.filter(magicPlatform => magicPlatform.exists);
     this.magicPlatforms.forEach(magicPlatform => magicPlatform.update());
     this.player.update(dt);
 

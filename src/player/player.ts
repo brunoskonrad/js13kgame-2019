@@ -18,6 +18,7 @@ export function createPlayer(world) {
     isOnFloor: false,
     isJumping: false,
     isRewinding: false,
+    rewindPosition: null,
     rewinder: new Rewind(this),
     moveRight() {
       this.dx = 5;
@@ -37,16 +38,16 @@ export function createPlayer(world) {
     rewind: delay(function() {
       if (this.rewinder.hasSteps && !this.isRewinding) {
         this.isRewinding = true;
-        this.createMagicPlatform();
+        this.rewindPosition = this.rewinder.lastStep.position;
       }
     }, PLATFORM_CASTING_DELAY),
     createMagicPlatform() {
-      if (this.rewinder.hasSteps) {
-        const { position } = this.rewinder.lastStep;
-
+      if (this.rewindPosition) {
         world.addMagicPlatform(
-          createMagicPlatform(position.x, position.y + this.height)
+          createMagicPlatform(this.rewindPosition.x, this.rewindPosition.y + this.height)
         );
+
+        this.rewindPosition = null;
       }
     },
     update(dt) {
@@ -61,7 +62,7 @@ export function createPlayer(world) {
           return;
         }
 
-        console.log('Rewind Finished');
+        this.createMagicPlatform();
         this.isRewinding = false;
       }
 

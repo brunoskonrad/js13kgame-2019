@@ -14,7 +14,6 @@ export function createPlayer(world) {
     color: "salmon",
     width: BASE_SIZE,
     height: BASE_SIZE,
-    dy: 5,
     isOnFloor: false,
     isJumping: false,
     isRewinding: false,

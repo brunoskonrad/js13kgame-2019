@@ -6,10 +6,12 @@ import World from "./world/World";
 import Events from "./utils/Events";
 import Menu from "./menu";
 import Timer from "./utils/Timer";
+import GameUI from "./ui";
 
 export default class Game {
   world: World = new World(this);
   menu: Menu = new Menu();
+  ui: GameUI = new GameUI();
   gameLoop: any;
 
   gameIsRunning: boolean = false;
@@ -34,13 +36,17 @@ export default class Game {
 
     this.gameIsRunning = true;
 
-    const { world } = this;
+    const { world, ui } = this;
     this.world.loadMap(firstMap);
 
     if (!this.gameLoop) {
       this.gameLoop = GameLoop({
         update: function(d) {
           world.update(d);
+
+          if (Timer.isRunning) {
+            ui.seconds = Timer.ellapseTime;
+          }
         },
         render: function() {
           world.render();

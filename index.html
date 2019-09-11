@@ -63,6 +63,18 @@
         font-size: 24px;
       }
 
+      .game-ui {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        right: 16px;
+        display: flex;
+        justify-content: space-between;
+        color: #111;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
       @media screen and (min-width: 1280px) {
         .container {
           width: 1280px;
@@ -116,6 +128,15 @@
   <body>
     <section class="container">
       <canvas class="my-game" width="1280" height="800"></canvas>
+      <section class="game-ui" data-game-ui>
+        <div>⏱ <span data-current-seconds>0</span></div>
+
+        <div>
+          <span data-used-platforms>0</span>/<span data-available-platforms
+            >0</span
+          >
+        </div>
+      </section>
       <section class="game-menu" data-game-menu>
         <div class="game-instructions">
           <p>

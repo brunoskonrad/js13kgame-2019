@@ -27,6 +27,7 @@ export function createPlayer(world) {
     init() {
       Events.on("MAGIC_PLATFORM_COLLECTED", () => {
         this.totalAmountOfMagicPlatforms++;
+        world.game.ui.availablePlatforms = this.totalAmountOfMagicPlatforms;
       });
     },
     moveRight() {

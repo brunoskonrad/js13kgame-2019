@@ -89,10 +89,12 @@ export default class World {
     this.magicPlatforms = this.magicPlatforms.filter(
       magicPlatform => magicPlatform.exists
     );
+    this.game.ui.usedPlatforms = this.magicPlatforms.length;
   };
 
   addMagicPlatform(sprite) {
     this.magicPlatforms.push(sprite);
+    this.game.ui.usedPlatforms = this.magicPlatforms.length;
   }
 
   update(dt) {

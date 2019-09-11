@@ -3,6 +3,7 @@ class Timer {
   private stopTime: number = 0;
 
   start() {
+    this.reset();
     this.startTime = Date.now();
   }
 
@@ -16,7 +17,17 @@ class Timer {
   }
 
   get ellapseTime() {
-    return (this.stopTime - this.startTime) / 1000;
+    if (!this.startTime) {
+      return 0;
+    }
+
+    const endTime = this.stopTime || Date.now();
+
+    return (endTime - this.startTime) / 1000;
+  }
+
+  get isRunning() {
+    return !!this.startTime && !this.stopTime;
   }
 }
 

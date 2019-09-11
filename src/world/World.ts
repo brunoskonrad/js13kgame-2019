@@ -1,5 +1,3 @@
-import { on } from "kontra/src/events";
-
 import { createPlayer } from "../player/player";
 
 import { handlePlayerCollisionWithPlatform } from "./handlePlayerCollisionWithPlatform";
@@ -47,8 +45,6 @@ export default class World {
     this.restore();
 
     const pieces = parseMap(theMap);
-
-    console.log(pieces);
 
     this.platforms = parsePlatforms(pieces);
     this.floatyGem = createFloatyGem();

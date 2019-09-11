@@ -62,7 +62,7 @@ export default class Game {
 
   restartLevel = () => {
     this.stop();
-    this.world.restore();
+    this.world.loadMap(firstMap);
     this.start();
   };
 

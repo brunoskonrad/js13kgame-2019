@@ -18,7 +18,7 @@ export default class World {
   platforms: any[] = [];
   magicPlatforms: any[] = [];
   player: any;
-  floatyGem: any = createFloatyGem();
+  floatyGem: any;
   collectableMagicPlatforms: any[] = [];
 
   constructor(game: Game) {
@@ -34,6 +34,7 @@ export default class World {
     this.platforms = [];
     this.magicPlatforms = [];
     this.collectableMagicPlatforms = [];
+    this.floatyGem.wasCollected = false;
   }
 
   endLevel = () => {
@@ -50,6 +51,7 @@ export default class World {
     console.log(pieces);
 
     this.platforms = parsePlatforms(pieces);
+    this.floatyGem = createFloatyGem();
 
     const playerPosition = pieces.find(piece => piece.tileType === 8);
     this.player.x = playerPosition.x;

@@ -2,6 +2,7 @@ import { getCanvas } from "kontra/src/core";
 import GameLoop from "kontra/src/gameLoop";
 
 import firstMap from "./maps/first.map";
+import secondMap from "./maps/second.map";
 import World from "./world/World";
 import Events from "./utils/Events";
 import Menu from "./menu";
@@ -18,6 +19,8 @@ export default class Game {
 
   constructor() {
     this.menu.render();
+
+    this.ui.availablePlatforms = this.world.player.totalAmountOfMagicPlatforms;
 
     Events.on("START_GAME", this.start);
     document.addEventListener("keypress", this.handleKeyPress);
@@ -37,7 +40,7 @@ export default class Game {
     this.gameIsRunning = true;
 
     const { world, ui } = this;
-    this.world.loadMap(firstMap);
+    this.world.loadMap(secondMap);
 
     if (!this.gameLoop) {
       this.gameLoop = GameLoop({
@@ -68,7 +71,7 @@ export default class Game {
 
   restartLevel = () => {
     this.stop();
-    this.world.loadMap(firstMap);
+    this.world.loadMap(secondMap);
     this.start();
   };
 

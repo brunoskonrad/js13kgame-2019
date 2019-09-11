@@ -7,14 +7,15 @@ import { handlePlayerCollisionWithBorders } from "./handlePlayerCollisionWithBor
 import { parseMap, parsePlatforms } from "../mapParser";
 import { GRAVITY } from "../constants";
 import { createFloatyGem } from "../entities/FloatyGem";
-import { handlePlayerCollisionWithFloatyGem } from "./handlePlayerCollisionWithFloatyGem";
+import { handlePlayerCollisionWithCollectables } from "./handlePlayerCollisionWithCollectables";
 import Events from "../utils/Events";
 
 export default class World {
   platforms: any[] = [];
   magicPlatforms: any[] = [];
   player: any;
-  floatyGem?: any = createFloatyGem();
+  floatyGem: any = createFloatyGem();
+  collectableMagicPlatforms: any[] = [];
 
   constructor() {
     this.player = createPlayer(this);
@@ -40,6 +41,12 @@ export default class World {
     return [...this.platforms, ...this.magicPlatforms];
   }
 
+  get collectableElements() {
+    return [this.floatyGem, ...this.collectableMagicPlatforms].filter(
+      element => element.collectable && !element.wasCollected
+    );
+  }
+
   removeOldMagicPlatforms = () => {
     this.magicPlatforms = this.magicPlatforms.filter(
       magicPlatform => magicPlatform.exists
@@ -52,10 +59,10 @@ export default class World {
 
   update(dt) {
     this.magicPlatforms.forEach(magicPlatform => magicPlatform.update());
+    this.collectableElements.forEach(collectableElements =>
+      collectableElements.update()
+    );
     this.player.update(dt);
-    if (this.floatyGem) {
-      this.floatyGem.update();
-    }
 
     if (!this.player.isOnFloor) {
       this.player.dy += GRAVITY * dt;
@@ -65,16 +72,16 @@ export default class World {
 
     handlePlayerCollisionWithPlatform(this);
     handlePlayerCollisionWithBorders(this);
-    handlePlayerCollisionWithFloatyGem(this);
+    handlePlayerCollisionWithCollectables(this);
   }
 
   render() {
     this.platforms.forEach(platform => platform.render());
     this.magicPlatforms.forEach(magicPlatform => magicPlatform.render());
-    this.player.render();
+    this.collectableElements.forEach(collectableElements =>
+      collectableElements.render()
+    );
 
-    if (this.floatyGem) {
-      this.floatyGem.render();
-    }
+    this.player.render();
   }
 }

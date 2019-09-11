@@ -30,6 +30,12 @@ export default class World {
     Events.on("FLOATY_GEM_COLLECTED", this.endLevel);
   }
 
+  restore() {
+    this.platforms = [];
+    this.magicPlatforms = [];
+    this.collectableMagicPlatforms = [];
+  }
+
   endLevel = () => {
     Timer.stop();
     this.game.menu.state = "game-score";
@@ -37,7 +43,7 @@ export default class World {
   };
 
   loadMap(theMap) {
-    this.collectableMagicPlatforms = [];
+    this.restore();
 
     const pieces = parseMap(theMap);
 

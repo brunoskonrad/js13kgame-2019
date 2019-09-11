@@ -18,7 +18,14 @@ export default class Game {
     this.menu.display();
 
     Events.on("RETURN_TO_GAME", this.start);
+    document.addEventListener("keypress", this.handleKeyPress);
   }
+
+  handleKeyPress = event => {
+    if (event.which === 13) {
+      this.restartLevel();
+    }
+  };
 
   start = () => {
     if (this.gameIsRunning) {
@@ -51,6 +58,12 @@ export default class Game {
     if (this.gameLoop) {
       this.gameLoop.stop();
     }
+  };
+
+  restartLevel = () => {
+    this.stop();
+    this.world.restore();
+    this.start();
   };
 
   renderGame() {

@@ -39,7 +39,7 @@ export default class World {
   endLevel = () => {
     Timer.stop();
     this.game.menu.state = "game-score";
-    this.game.menu.display();
+    this.game.menu.render();
   };
 
   loadMap(theMap) {

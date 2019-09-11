@@ -15,9 +15,9 @@ export default class Game {
   gameIsRunning: boolean = false;
 
   constructor() {
-    this.menu.display();
+    this.menu.render();
 
-    Events.on("RETURN_TO_GAME", this.start);
+    Events.on("START_GAME", this.start);
     document.addEventListener("keypress", this.handleKeyPress);
   }
 

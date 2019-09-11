@@ -4,7 +4,7 @@ type GameEvent =
   | "MAGIC_PLATFORM_GONE"
   | "FLOATY_GEM_COLLECTED"
   | "MAGIC_PLATFORM_COLLECTED"
-  | "RETURN_TO_GAME";
+  | "START_GAME";
 
 class Events {
   on(event: GameEvent, callback: any) {

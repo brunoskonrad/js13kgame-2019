@@ -16,7 +16,7 @@ class Timer {
   }
 
   get ellapseTime() {
-    return ((this.stopTime - this.startTime) / 1000).toFixed(2);
+    return (this.stopTime - this.startTime) / 1000;
   }
 }
 

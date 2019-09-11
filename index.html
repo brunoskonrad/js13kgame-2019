@@ -65,6 +65,26 @@
         }
       }
 
+      .button {
+        padding: 8px 16px;
+        background-color: salmon;
+        border-radius: 2px;
+        border: none;
+        font-size: 16px;
+        text-transform: lowercase;
+        letter-spacing: 1px;
+        color: white;
+      }
+
+      .button:hover {
+        background-color: #ff8069;
+        cursor: pointer;
+      }
+
+      .button:active {
+        background-color: #ff784f;
+      }
+
       .hidden {
         opacity: 0;
       }
@@ -91,8 +111,19 @@
             <li><strong>a or arrow left</strong>: move left</li>
             <li><strong>d or arrow right</strong>: move right</li>
             <li><strong>shift</strong>: rewind</li>
+            <li><strong>enter</strong>: restart level</li>
           </ul>
-          <p>Click anywhere to start</p>
+
+          <button
+            style="margin-top: 12px;"
+            data-start-game-button
+            class="button"
+          >
+            Start
+          </button>
+          <span style="margin-left: 12px;"
+            >or press <strong>space</strong></span
+          >
         </div>
         <div class="game-score none">
           <p>⏱ <span data-level-duration>0</span> seconds</p>

@@ -2,7 +2,7 @@ import Sprite from "kontra/src/sprite";
 
 import { handlePlayerInput } from "./handlePlayerInput";
 import Rewind from "./Rewind";
-import { createMagicPlatform } from "../magicPlatform";
+import { createMagicPlatform } from "../entities/magicPlatform";
 import { BASE_SIZE, PLATFORM_CASTING_DELAY } from "../constants";
 import { delay } from "../utils/delay";
 
@@ -18,7 +18,7 @@ export function createPlayer(world) {
     isJumping: false,
     isRewinding: false,
     canRewind() {
-      return this.isJumping
+      return this.isJumping;
     },
     rewindPosition: null,
     rewinder: new Rewind(this),

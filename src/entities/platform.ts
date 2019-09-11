@@ -1,5 +1,5 @@
 import Sprite from "kontra/src/sprite";
-import { BASE_SIZE } from "./constants";
+import { BASE_SIZE } from "../constants";
 
 export function createPlatform(
   x = 0,
@@ -13,6 +13,6 @@ export function createPlatform(
     width,
     height,
     type: "platform",
-    color: "darkgray",
+    color: "darkgray"
   });
 }

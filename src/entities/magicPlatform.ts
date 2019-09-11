@@ -1,8 +1,8 @@
 import Sprite from "kontra/src/sprite";
 import { emit } from "kontra/src/events";
 
-import { BASE_SIZE, PLATFORM_DURATION } from "./constants";
-import Events from "./utils/Events";
+import { BASE_SIZE, PLATFORM_DURATION } from "../constants";
+import Events from "../utils/Events";
 
 export function createMagicPlatform(x = 0, y = 0) {
   return Sprite({

@@ -1,4 +1,4 @@
-import { createPlatform } from "./platform";
+import { createPlatform } from "./entities/platform";
 import { BASE_SIZE } from "./constants";
 
 export type MapPieces = {

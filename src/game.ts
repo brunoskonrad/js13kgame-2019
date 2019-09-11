@@ -4,6 +4,7 @@ import GameLoop from "kontra/src/gameLoop";
 import firstMap from "./maps/first.map";
 import World from "./world/World";
 import Events from "./utils/Events";
+import Menu from "./menu";
 
 export default class Game {
   world: World = new World();
@@ -47,32 +48,5 @@ export default class Game {
 
   renderMenu() {
     getCanvas().classList.add("hidden");
-  }
-}
-
-type MenuState = "game-instructions" | "game-score";
-
-class Menu {
-  menuElement = document.querySelector("[data-game-menu]");
-  state: MenuState = "game-instructions";
-
-  constructor() {
-    this.menuElement.addEventListener("click", this.clickMenu);
-  }
-
-  clickMenu = () => {
-    Events.emit("RETURN_TO_GAME");
-  };
-
-  hide() {
-    this.menuElement.classList.add("hidden");
-  }
-
-  display() {
-    switch (this.state) {
-      case "game-instructions": {
-        document.querySelector(".game-instructions").classList.remove("none");
-      }
-    }
   }
 }

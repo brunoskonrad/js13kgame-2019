@@ -10,7 +10,7 @@ export function createMagicPlatform(x = 0, y = 0) {
     type: "platform",
     width: BASE_SIZE + BASE_SIZE / 2,
     height: BASE_SIZE,
-    color: "rgba(100, 100, 100, 1)",
+    color: "rgba(17, 17, 17, 1)",
     exists: true,
     eventEmitted: false,
     displayTime: Date.now(),
@@ -20,7 +20,7 @@ export function createMagicPlatform(x = 0, y = 0) {
 
       if (this.exists) {
         const opacity = (100 - (100 * visibleSince) / PLATFORM_DURATION) / 100;
-        this.color = `rgba(100, 100, 100, ${opacity})`;
+        this.color = `rgba(17, 17, 17, ${opacity})`;
       }
 
       if (!this.exists && !this.eventEmitted) {

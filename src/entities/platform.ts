@@ -13,6 +13,6 @@ export function createPlatform(
     width,
     height,
     type: "platform",
-    color: "#888"
+    color: "#111"
   });
 }

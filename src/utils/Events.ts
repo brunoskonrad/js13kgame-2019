@@ -1,6 +1,6 @@
 import { on, off, emit } from "kontra/src/events";
 
-type GameEvent = "MAGIC_PLATFORM_GONE";
+type GameEvent = "MAGIC_PLATFORM_GONE" | "FLOATY_GEM_COLLECTED";
 
 class Events {
   on(event: GameEvent, callback: any) {

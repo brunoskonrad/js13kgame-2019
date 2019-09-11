@@ -18,14 +18,14 @@ export function createPlayer(world) {
     isOnFloor: false,
     isJumping: false,
     isRewinding: false,
-    totalAmountOfMagicPlatforms: 2,
+    totalAmountOfMagicPlatforms: 0,
     canRewind() {
       return this.isJumping;
     },
     rewindPosition: null,
     rewinder: new Rewind(this),
     init() {
-      Events.on("FLOATY_GEM_COLLECTED", () => {
+      Events.on("MAGIC_PLATFORM_COLLECTED", () => {
         this.totalAmountOfMagicPlatforms++;
       });
     },

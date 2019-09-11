@@ -9,6 +9,7 @@ import { GRAVITY } from "../constants";
 import { createFloatyGem } from "../entities/FloatyGem";
 import { handlePlayerCollisionWithCollectables } from "./handlePlayerCollisionWithCollectables";
 import Events from "../utils/Events";
+import { createCollectableMagicPlatform } from "../entities/collectableMagicPlatform";
 
 export default class World {
   platforms: any[] = [];
@@ -25,6 +26,8 @@ export default class World {
   }
 
   loadMap(theMap) {
+    this.collectableMagicPlatforms = [];
+
     const pieces = parseMap(theMap);
 
     this.platforms = parsePlatforms(pieces);
@@ -36,6 +39,15 @@ export default class World {
     const gemPosition = pieces.find(piece => piece.tileType === 7);
     this.floatyGem.x = gemPosition.x + 6;
     this.floatyGem.y = gemPosition.y + 6;
+
+    const collectableMagicPlatformPositions = pieces.filter(
+      piece => piece.tileType === 2
+    );
+    collectableMagicPlatformPositions.forEach(position => {
+      this.collectableMagicPlatforms.push(
+        createCollectableMagicPlatform(position.x, position.y)
+      );
+    });
   }
 
   get collisionElements() {

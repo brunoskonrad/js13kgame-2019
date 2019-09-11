@@ -1,5 +1,4 @@
 import Sprite from "kontra/src/sprite";
-import { emit } from "kontra/src/events";
 
 import { BASE_SIZE, PLATFORM_DURATION } from "../constants";
 import Events from "../utils/Events";

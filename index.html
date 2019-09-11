@@ -13,10 +13,12 @@
         justify-content: center;
         background-color: #fedede;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
+        margin: 0;
       }
 
       .container {
         border: 5px solid transparent;
+        margin: 16px;
         width: 100%;
         min-width: 525px;
         min-height: 345px;
@@ -47,6 +49,13 @@
 
       .game-instructions {
         margin: 48px;
+      }
+
+      .game-score {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       @media screen and (min-width: 1280px) {
@@ -84,6 +93,9 @@
             <li><strong>shift</strong>: rewind</li>
           </ul>
           <p>Click anywhere to start</p>
+        </div>
+        <div class="game-score none">
+          <p>⏱ <span data-level-duration>0</span> seconds</p>
         </div>
       </section>
     </section>

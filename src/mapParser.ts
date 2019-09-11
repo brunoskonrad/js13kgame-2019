@@ -21,7 +21,7 @@ export function parseMap(rawMap: string) {
     let piece: Piece = null;
 
     itemsInLine.forEach((item, index) => {
-      if (item !== "0") {
+      if (item === "1") {
         if (!piece) {
           piece = new Piece(item, index, columnIndex);
         }
@@ -31,6 +31,10 @@ export function parseMap(rawMap: string) {
         if (piece) {
           pieces.push(piece.mapPieces);
           piece = null;
+        }
+
+        if (item !== "0") {
+          pieces.push(new Piece(item, index, columnIndex).mapPieces);
         }
       }
     });

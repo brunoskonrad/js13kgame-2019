@@ -10,25 +10,38 @@ import { createFloatyGem } from "../entities/FloatyGem";
 import { handlePlayerCollisionWithCollectables } from "./handlePlayerCollisionWithCollectables";
 import Events from "../utils/Events";
 import { createCollectableMagicPlatform } from "../entities/collectableMagicPlatform";
+import Timer from "../utils/Timer";
+import Game from "../game";
 
 export default class World {
+  game: Game;
   platforms: any[] = [];
   magicPlatforms: any[] = [];
   player: any;
   floatyGem: any = createFloatyGem();
   collectableMagicPlatforms: any[] = [];
 
-  constructor() {
+  constructor(game: Game) {
+    this.game = game;
     this.player = createPlayer(this);
     this.player.init();
 
     Events.on("MAGIC_PLATFORM_GONE", this.removeOldMagicPlatforms);
+    Events.on("FLOATY_GEM_COLLECTED", this.endLevel);
   }
+
+  endLevel = () => {
+    Timer.stop();
+    this.game.menu.state = "game-score";
+    this.game.menu.display();
+  };
 
   loadMap(theMap) {
     this.collectableMagicPlatforms = [];
 
     const pieces = parseMap(theMap);
+
+    console.log(pieces);
 
     this.platforms = parsePlatforms(pieces);
 

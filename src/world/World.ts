@@ -18,7 +18,7 @@ export default class World {
   platforms: any[] = [];
   magicPlatforms: any[] = [];
   player: any;
-  floatyGem: any;
+  floatyGem: any = createFloatyGem();
   collectableMagicPlatforms: any[] = [];
 
   constructor(game: Game) {

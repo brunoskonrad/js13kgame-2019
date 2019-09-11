@@ -19,6 +19,7 @@ export default class World {
 
   constructor() {
     this.player = createPlayer(this);
+    this.player.init();
 
     Events.on("MAGIC_PLATFORM_GONE", this.removeOldMagicPlatforms);
   }
@@ -45,6 +46,10 @@ export default class World {
     return [this.floatyGem, ...this.collectableMagicPlatforms].filter(
       element => element.collectable && !element.wasCollected
     );
+  }
+
+  get canSpawnNewMagicPlatform() {
+    return this.player.totalAmountOfMagicPlatforms > this.magicPlatforms.length;
   }
 
   removeOldMagicPlatforms = () => {

@@ -5,6 +5,7 @@ import Rewind from "./Rewind";
 import { createMagicPlatform } from "../entities/magicPlatform";
 import { BASE_SIZE, PLATFORM_CASTING_DELAY } from "../constants";
 import { delay } from "../utils/delay";
+import Events from "../utils/Events";
 
 export function createPlayer(world) {
   return Sprite({
@@ -17,11 +18,17 @@ export function createPlayer(world) {
     isOnFloor: false,
     isJumping: false,
     isRewinding: false,
+    totalAmountOfMagicPlatforms: 2,
     canRewind() {
       return this.isJumping;
     },
     rewindPosition: null,
     rewinder: new Rewind(this),
+    init() {
+      Events.on("FLOATY_GEM_COLLECTED", () => {
+        this.totalAmountOfMagicPlatforms++;
+      });
+    },
     moveRight() {
       this.dx = 5;
     },
@@ -44,7 +51,7 @@ export function createPlayer(world) {
       }
     }, PLATFORM_CASTING_DELAY),
     createMagicPlatform() {
-      if (this.rewindPosition) {
+      if (!!this.rewindPosition && world.canSpawnNewMagicPlatform) {
         world.addMagicPlatform(
           createMagicPlatform(
             this.rewindPosition.x,

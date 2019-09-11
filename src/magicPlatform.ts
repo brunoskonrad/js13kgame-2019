@@ -1,11 +1,8 @@
 import Sprite from "kontra/src/sprite";
 import { emit } from "kontra/src/events";
 
-import {
-  BASE_SIZE,
-  PLATFORM_DURATION,
-  GAME_EVENT_MAGIC_PLATFORM_GONE
-} from "./constants";
+import { BASE_SIZE, PLATFORM_DURATION } from "./constants";
+import Events from "./utils/Events";
 
 export function createMagicPlatform(x = 0, y = 0) {
   return Sprite({
@@ -28,7 +25,7 @@ export function createMagicPlatform(x = 0, y = 0) {
       }
 
       if (!this.exists && !this.eventEmitted) {
-        emit(GAME_EVENT_MAGIC_PLATFORM_GONE);
+        Events.emit("MAGIC_PLATFORM_GONE");
       }
     }
   });

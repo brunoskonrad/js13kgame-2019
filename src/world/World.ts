@@ -5,9 +5,10 @@ import { createPlayer } from "../player/player";
 import { handlePlayerCollisionWithPlatform } from "./handlePlayerCollisionWithPlatform";
 import { handlePlayerCollisionWithBorders } from "./handlePlayerCollisionWithBorders";
 import { parseMap, parsePlatforms } from "../mapParser";
-import { GRAVITY, GAME_EVENT_MAGIC_PLATFORM_GONE } from "../constants";
+import { GRAVITY } from "../constants";
 import { createFloatyGem } from "../entities/FloatyGem";
 import { handlePlayerCollisionWithFloatyGem } from "./handlePlayerCollisionWithFloatyGem";
+import Events from "../utils/Events";
 
 export default class World {
   platforms: any[] = [];
@@ -18,7 +19,7 @@ export default class World {
   constructor() {
     this.player = createPlayer(this);
 
-    on(GAME_EVENT_MAGIC_PLATFORM_GONE, this.removeOldMagicPlatforms);
+    Events.on("MAGIC_PLATFORM_GONE", this.removeOldMagicPlatforms);
   }
 
   loadMap(theMap) {

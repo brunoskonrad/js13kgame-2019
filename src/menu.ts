@@ -97,6 +97,8 @@ class GameInfoMenu implements MenuComponent {
 
 class AfterLevelMenu implements MenuComponent {
   gameScoreElement = document.querySelector(".game-score");
+  restartButton = document.querySelector("[data-restart-level-button]");
+  nextLevelButton = document.querySelector("[data-next-level-button]");
 
   init() {}
 

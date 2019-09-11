@@ -56,6 +56,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-flow: column;
+      }
+
+      .game-score p {
+        font-size: 24px;
       }
 
       @media screen and (min-width: 1280px) {
@@ -65,7 +70,7 @@
         }
       }
 
-      .button {
+      button {
         padding: 8px 16px;
         background-color: salmon;
         border-radius: 2px;
@@ -76,13 +81,27 @@
         color: white;
       }
 
-      .button:hover {
+      button:hover {
         background-color: #ff8069;
         cursor: pointer;
       }
 
-      .button:active {
+      button:active {
         background-color: #ff784f;
+      }
+
+      .button-secondary {
+        background-color: transparent;
+        text-decoration: underline;
+      }
+
+      .button-secondary:hover {
+        background-color: transparent;
+        cursor: pointer;
+      }
+
+      .button-secondary:active {
+        background-color: transparent;
       }
 
       .hidden {
@@ -114,11 +133,7 @@
             <li><strong>enter</strong>: restart level</li>
           </ul>
 
-          <button
-            style="margin-top: 12px;"
-            data-start-game-button
-            class="button"
-          >
+          <button style="margin-top: 12px;" data-start-game-button>
             Start
           </button>
           <span style="margin-left: 12px;"
@@ -127,6 +142,15 @@
         </div>
         <div class="game-score none">
           <p>⏱ <span data-level-duration>0</span> seconds</p>
+
+          <div style="margin-top: 12px;">
+            <button class="button-secondary" data-restart-level-button>
+              Restart Level
+            </button>
+            <button style="margin-left: 12px;" data-next-level-button>
+              Next Level
+            </button>
+          </div>
         </div>
       </section>
     </section>

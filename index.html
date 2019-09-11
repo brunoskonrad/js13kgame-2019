@@ -1,30 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>js13kgames 👾 2019</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>js13kgames 👾 2019</title>
 
-  <style>
-    body {
-      display: flex;
-      align-content: center;
-      justify-content: center;
-      background-color: #fedede;
-    }
+    <style>
+      body {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        background-color: #fedede;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
 
-    .my-game {
-      background-color: #fedede;
-      border: 5px solid #fecece;
-    }
-  </style>
-</head>
-<body>
-  <canvas class="my-game" width="1280" height="800"></canvas>
+      .container {
+        border: 5px solid transparent;
+        width: 100%;
+        min-width: 525px;
+        min-height: 345px;
+        position: relative;
+      }
 
-  <!-- <script src="https://cdn.jsdelivr.net/npm/kontra@6.2.2/kontra.min.js"></script>
+      .my-game {
+        width: 100%;
+        background-color: #fedede;
+        border: 5px solid #fecece;
+        transition: all 200ms ease-in-out;
+      }
+
+      .game-menu {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 5px solid #fecece;
+        background-color: #111;
+        transition: all 200ms ease-in-out;
+
+        color: white;
+      }
+
+      .game-instructions {
+        margin: 48px;
+      }
+
+      @media screen and (min-width: 1280px) {
+        .container {
+          width: 1280px;
+          height: 800px;
+        }
+      }
+
+      .hidden {
+        opacity: 0;
+      }
+
+      .none {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="container">
+      <canvas class="my-game" width="1280" height="800"></canvas>
+      <section class="game-menu" data-game-menu>
+        <div class="game-instructions">
+          <p>
+            This is a game about returning one step to enable two or more.
+            <br />
+            Sometimes you will have to rewind your jump in order to create a
+            temporary platform.
+          </p>
+          <p>Game commands:</p>
+          <ul>
+            <li><strong>w, arrow up or space</strong>: jump</li>
+            <li><strong>a or arrow left</strong>: move left</li>
+            <li><strong>d or arrow right</strong>: move right</li>
+            <li><strong>shift</strong>: rewind</li>
+          </ul>
+        </div>
+      </section>
+    </section>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/kontra@6.2.2/kontra.min.js"></script>
   <script src="game.js"></script> -->
-  <script src="build/js13kgame-2019.min.js"></script>
-</body>
+    <script src="build/js13kgame-2019.min.js"></script>
+  </body>
 </html>

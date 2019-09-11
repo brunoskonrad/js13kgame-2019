@@ -1,5 +1,5 @@
 import Events from "../utils/Events";
-import { collectionableEntity } from "./collectionable";
+import { collectableEntity } from "./collectable";
 import { createFloatyEntity } from "./floatyEntity";
 
 export function createFloatyGem(x = 0, y = 0, color = "purple") {
@@ -10,7 +10,7 @@ export function createFloatyGem(x = 0, y = 0, color = "purple") {
     width: 20,
     height: 20,
     type: "floaty-gem",
-    ...collectionableEntity(function() {
+    ...collectableEntity(function() {
       Events.emit("FLOATY_GEM_COLLECTED");
     })
   });

@@ -1,5 +1,5 @@
 import Events from "../utils/Events";
-import { collectionableEntity } from "./collectionable";
+import { collectableEntity } from "./collectable";
 import { createFloatyEntity } from "./floatyEntity";
 
 export function createCollectableMagicPlatform(x = 0, y = 0, color = "orange") {
@@ -10,7 +10,7 @@ export function createCollectableMagicPlatform(x = 0, y = 0, color = "orange") {
     width: 30,
     height: 20,
     type: "collectable-magic-platform",
-    ...collectionableEntity(function() {
+    ...collectableEntity(function() {
       Events.emit("MAGIC_PLATFORM_COLLECTED");
     })
   });

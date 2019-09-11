@@ -1,6 +1,6 @@
 type Collect = () => void;
 
-export function collectionableEntity(collect: Collect) {
+export function collectableEntity(collect: Collect) {
   return {
     collectable: true,
     wasCollected: false,

@@ -17,7 +17,7 @@ class LevelsOrder {
     return this.levels[this.currentLevelIndex];
   }
 
-  get gameOver(): boolean {
+  get isLastLevel() {
     return this.levels.length - 1 === this.currentLevelIndex;
   }
 

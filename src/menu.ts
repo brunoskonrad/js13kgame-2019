@@ -68,11 +68,12 @@ class GameInfoMenu implements MenuComponent {
       return;
     }
 
-    this.button.addEventListener("click", this.onStartButtonClick);
-    document.addEventListener("keypress", this.onSpaceBarPressDown);
-    this.mounted = true;
+    const { listOfLevels, isGameOver } = game;
 
-    const { listOfLevels } = game;
+    if (!isGameOver) {
+      this.button.addEventListener("click", this.onStartButtonClick);
+      document.addEventListener("keypress", this.onSpaceBarPressDown);
+    }
 
     if (listOfLevels.find(level => level.isCompleted)) {
       this.levelsList.innerHTML = "";
@@ -94,6 +95,12 @@ class GameInfoMenu implements MenuComponent {
 
       this.levelsList.addEventListener("click", this.onLevelClick);
     }
+
+    if (isGameOver) {
+      document.querySelector("[data-start-game-info]").classList.add("none");
+    }
+
+    this.mounted = true;
   }
 
   onSpaceBarPressDown = event => {
@@ -140,7 +147,11 @@ class AfterLevelMenu implements MenuComponent {
     this.game = game;
 
     this.restartButton.addEventListener("click", this.restart);
-    this.nextLevelButton.addEventListener("click", this.nextLevel);
+    if (this.game.levels.isLastLevel) {
+      this.nextLevelButton.classList.add("none");
+    } else {
+      this.nextLevelButton.addEventListener("click", this.nextLevel);
+    }
 
     document.addEventListener("keypress", this.handleKeyPress);
   }

@@ -23,7 +23,7 @@ export default class Game {
     this.menu = new Menu(this);
     this.menu.render();
 
-    this.levels.setLevel(this.highscore.lastSavedLevel + 1);
+    this.levels.setLevel(this.highscore.lastSavedLevel + 1 || 1);
 
     this.ui.availablePlatforms = this.world.player.totalAmountOfMagicPlatforms;
 
@@ -38,6 +38,10 @@ export default class Game {
     });
 
     document.addEventListener("keypress", this.handleKeyPress);
+  }
+
+  get isGameOver() {
+    return this.levels.levels.length === this.highscore.completedLevels.length;
   }
 
   handleKeyPress = event => {

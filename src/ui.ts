@@ -1,5 +1,3 @@
-import Events from "./utils/Events";
-
 class GameUI {
   private currentTimeElement = document.querySelector("[data-current-seconds]");
   private usedPlatformsElement = document.querySelector(

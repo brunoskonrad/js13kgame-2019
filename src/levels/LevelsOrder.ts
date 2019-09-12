@@ -5,15 +5,13 @@ import BaseLevel from "./BaseLevel";
 import LevelThree from "./LevelThree";
 import LevelFour from "./LevelFour";
 import LevelFive from "./LevelFive";
-import LevelSix from "./LevelSix";
 
 const LEVELS_LIST_IN_ORDER = [
   LevelOne,
   LevelTwo,
   LevelThree,
   LevelFour,
-  LevelFive,
-  LevelSix
+  LevelFive
 ];
 
 class LevelsOrder {

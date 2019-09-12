@@ -103,7 +103,15 @@ class AfterLevelMenu implements MenuComponent {
   init() {
     this.restartButton.addEventListener("click", this.restart);
     this.nextLevelButton.addEventListener("click", this.nextLevel);
+
+    document.addEventListener("keypress", this.handleKeyPress);
   }
+
+  handleKeyPress = event => {
+    if (event.which === 32) {
+      this.nextLevel();
+    }
+  };
 
   restart = () => {
     Events.emit("RESTART_LEVEL");
@@ -126,6 +134,7 @@ class AfterLevelMenu implements MenuComponent {
 
     this.restartButton.removeEventListener("click", this.restart);
     this.nextLevelButton.removeEventListener("click", this.nextLevel);
+    document.removeEventListener("keypress", this.handleKeyPress);
   }
 }
 

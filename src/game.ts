@@ -23,6 +23,8 @@ export default class Game {
     this.menu = new Menu(this);
     this.menu.render();
 
+    this.levels.setLevel(this.highscore.lastSavedLevel + 1);
+
     this.ui.availablePlatforms = this.world.player.totalAmountOfMagicPlatforms;
 
     Events.on("START_GAME", this.start);

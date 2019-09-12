@@ -26,6 +26,16 @@ class LevelsOrder {
       this.currentLevelIndex++;
     }
   }
+
+  setLevel(level: number) {
+    const index = level - 1;
+
+    if (this.levels.length > index) {
+      this.currentLevelIndex = index;
+    } else {
+      this.currentLevelIndex = this.levels.length - 1;
+    }
+  }
 }
 
 export default LevelsOrder;

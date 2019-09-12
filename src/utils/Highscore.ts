@@ -31,7 +31,13 @@ class Highscore {
   }
 
   get completedLevels() {
-    return Object.keys(this.data).map(Number);
+    return Object.keys(this.data)
+      .sort()
+      .map(Number);
+  }
+
+  get lastSavedLevel() {
+    return this.completedLevels[this.completedLevels.length - 1];
   }
 }
 

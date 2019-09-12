@@ -88,9 +88,9 @@ export function createPlayer(world) {
       if (
         this.isJumping &&
         this.jumpKeyPressed &&
-        Date.now() - this.jumpStartTime < 200
+        Date.now() - this.jumpStartTime < 80
       ) {
-        this.dy -= 0.3;
+        this.dy -= 0.7;
       }
 
       if (this.canRewind()) {

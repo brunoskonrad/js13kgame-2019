@@ -55,7 +55,8 @@ export default class Game {
 
     return this.levels.levels.map(level => ({
       levelNumber: level.levelNumber,
-      isCompleted: listOfCompletedLevels.includes(level.levelNumber)
+      isCompleted: listOfCompletedLevels.includes(level.levelNumber),
+      highscore: this.highscore.getHighscore(level)
     }));
   }
 

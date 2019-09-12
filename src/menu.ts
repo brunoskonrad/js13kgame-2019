@@ -62,6 +62,7 @@ class GameInfoMenu implements MenuComponent {
   button = document.querySelector("[data-start-game-button]");
   levelsListContainer = document.querySelector("[data-levels-container]");
   levelsList = document.querySelector("[data-levels-list]");
+  highscoreContainer = document.querySelector("[data-highscore-menu]");
 
   init(game: Game) {
     if (this.mounted) {
@@ -77,6 +78,7 @@ class GameInfoMenu implements MenuComponent {
 
     if (listOfLevels.find(level => level.isCompleted)) {
       this.levelsList.innerHTML = "";
+      this.highscoreContainer.innerHTML = "";
 
       listOfLevels
         .filter(level => level.isCompleted)
@@ -88,9 +90,17 @@ class GameInfoMenu implements MenuComponent {
           button.dataset["level"] = level.levelNumber.toString();
 
           this.levelsList.appendChild(button);
+
+          const highscoreLine = document.createElement("li");
+          highscoreLine.innerHTML = `<strong>Level ${
+            level.levelNumber
+          }</strong>: ${level.highscore.toFixed(2)} seconds`;
+          this.highscoreContainer.appendChild(highscoreLine);
         });
 
       this.levelsListContainer.classList.remove("none");
+      this.highscoreContainer.classList.remove("none");
+      document.querySelector("[data-highscore-label]").classList.remove("none");
       this.button.innerHTML = "Continue";
 
       this.levelsList.addEventListener("click", this.onLevelClick);

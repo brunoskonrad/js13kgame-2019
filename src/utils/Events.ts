@@ -8,7 +8,8 @@ type GameEvent =
   | "RESTART_LEVEL"
   | "NEXT_LEVEL"
   | "LEVEL_FINISHED"
-  | "OPEN_GAME_MENU";
+  | "OPEN_GAME_MENU"
+  | "LOAD_LEVEL";
 
 class Events {
   on(event: GameEvent, callback: any) {

@@ -90,6 +90,8 @@ class GameInfoMenu implements MenuComponent {
 
       this.levelsListContainer.classList.remove("none");
       this.button.innerHTML = "Continue";
+
+      this.levelsList.addEventListener("click", this.onLevelClick);
     }
   }
 
@@ -103,6 +105,14 @@ class GameInfoMenu implements MenuComponent {
     Events.emit("START_GAME");
   };
 
+  onLevelClick = event => {
+    const { level } = event.target.dataset;
+
+    if (level) {
+      Events.emit("LOAD_LEVEL", level);
+    }
+  };
+
   render() {
     this.gameInstructionsElement.classList.remove("none");
   }
@@ -110,6 +120,7 @@ class GameInfoMenu implements MenuComponent {
   tearDown() {
     this.button.removeEventListener("click", this.onStartButtonClick);
     document.removeEventListener("keypress", this.onSpaceBarPressDown);
+    this.levelsList.removeEventListener("click", this.onLevelClick);
 
     this.gameInstructionsElement.classList.add("none");
     this.mounted = false;

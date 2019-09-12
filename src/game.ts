@@ -32,6 +32,10 @@ export default class Game {
     Events.on("NEXT_LEVEL", this.nextLevel);
     Events.on("FLOATY_GEM_COLLECTED", this.endLevel);
     Events.on("OPEN_GAME_MENU", this.openGameMenu);
+    Events.on("LOAD_LEVEL", level => {
+      this.levels.setLevel(level);
+      this.start();
+    });
 
     document.addEventListener("keypress", this.handleKeyPress);
   }

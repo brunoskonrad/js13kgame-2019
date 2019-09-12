@@ -2,8 +2,19 @@ import LevelOne from "./LevelOne";
 import LevelTwo from "./LevelTwo";
 import World from "../world/World";
 import BaseLevel from "./BaseLevel";
+import LevelThree from "./LevelThree";
+import LevelFour from "./LevelFour";
+import LevelFive from "./LevelFive";
+import LevelSix from "./LevelSix";
 
-const LEVELS_LIST_IN_ORDER = [LevelOne, LevelTwo];
+const LEVELS_LIST_IN_ORDER = [
+  LevelOne,
+  LevelTwo,
+  LevelThree,
+  LevelFour,
+  LevelFive,
+  LevelSix
+];
 
 class LevelsOrder {
   private currentLevelIndex = 0;

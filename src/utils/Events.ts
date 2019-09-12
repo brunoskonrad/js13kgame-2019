@@ -6,7 +6,8 @@ type GameEvent =
   | "MAGIC_PLATFORM_COLLECTED"
   | "START_GAME"
   | "RESTART_LEVEL"
-  | "NEXT_LEVEL";
+  | "NEXT_LEVEL"
+  | "LEVEL_FINISHED";
 
 class Events {
   on(event: GameEvent, callback: any) {

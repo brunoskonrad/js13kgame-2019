@@ -9,6 +9,7 @@ class BaseLevel {
   map: string;
   availableMagicPlatformsAtTheBeginning: number = 0;
   name: string = "BaseLevel";
+  levelNumber: number = 0;
 
   constructor(world: World) {
     this.world = world;

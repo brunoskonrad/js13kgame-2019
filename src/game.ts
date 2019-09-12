@@ -7,6 +7,7 @@ import Menu from "./menu";
 import Timer from "./utils/Timer";
 import GameUI from "./ui";
 import LevelsOrder from "./levels/LevelsOrder";
+import Highscore from "./utils/Highscore";
 
 export default class Game {
   world: World = new World(this);
@@ -14,6 +15,7 @@ export default class Game {
   ui: GameUI = new GameUI();
   levels: LevelsOrder = new LevelsOrder(this.world);
   gameLoop: any;
+  highscore: Highscore = new Highscore();
 
   gameIsRunning: boolean = false;
 
@@ -25,6 +27,7 @@ export default class Game {
     Events.on("START_GAME", this.start);
     Events.on("RESTART_LEVEL", this.restartLevel);
     Events.on("NEXT_LEVEL", this.nextLevel);
+    Events.on("FLOATY_GEM_COLLECTED", this.endLevel);
 
     document.addEventListener("keypress", this.handleKeyPress);
   }
@@ -83,6 +86,14 @@ export default class Game {
     this.levels.next();
     this.levels.current.start();
     this.start();
+  };
+
+  endLevel = () => {
+    Timer.stop();
+    this.highscore.setHighscore(this.levels.current, Timer.ellapseTime);
+
+    this.menu.state = "game-score";
+    this.menu.render();
   };
 
   renderGame() {

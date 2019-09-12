@@ -25,7 +25,6 @@ export default class World {
     this.player.init();
 
     Events.on("MAGIC_PLATFORM_GONE", this.removeOldMagicPlatforms);
-    Events.on("FLOATY_GEM_COLLECTED", this.endLevel);
   }
 
   restore() {
@@ -34,12 +33,6 @@ export default class World {
     this.collectableMagicPlatforms = [];
     this.floatyGem.wasCollected = false;
   }
-
-  endLevel = () => {
-    Timer.stop();
-    this.game.menu.state = "game-score";
-    this.game.menu.render();
-  };
 
   get collisionElements() {
     return [...this.platforms, ...this.magicPlatforms];

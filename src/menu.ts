@@ -12,6 +12,7 @@ class Menu {
   isVisible: boolean = true;
 
   constructor(game: Game) {
+    this.game = game;
     this.menuComponent.init(game);
   }
 
@@ -128,11 +129,16 @@ class GameInfoMenu implements MenuComponent {
 }
 
 class AfterLevelMenu implements MenuComponent {
+  game: Game;
+
   gameScoreElement = document.querySelector(".game-score");
+  scoreMessageElement = document.querySelector("[data-level-message]");
   restartButton = document.querySelector("[data-restart-level-button]");
   nextLevelButton = document.querySelector("[data-next-level-button]");
 
-  init() {
+  init(game: Game) {
+    this.game = game;
+
     this.restartButton.addEventListener("click", this.restart);
     this.nextLevelButton.addEventListener("click", this.nextLevel);
 
@@ -155,6 +161,18 @@ class AfterLevelMenu implements MenuComponent {
 
   render() {
     this.gameScoreElement.classList.remove("none");
+
+    const highscore = this.game.highscore.getHighscore(
+      this.game.levels.current
+    );
+
+    if (Timer.ellapseTime > highscore) {
+      this.scoreMessageElement.innerHTML = `Not this time! Your highscore is <strong>${highscore.toFixed(
+        2
+      )}</strong>.`;
+    } else {
+      this.scoreMessageElement.innerHTML = `🎉 Congrats on your new highscore! ☝️`;
+    }
 
     document.querySelector(
       "[data-level-duration]"

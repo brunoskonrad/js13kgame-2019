@@ -151,7 +151,6 @@
     <section class="container">
       <canvas class="my-game" width="1280" height="800"></canvas>
       <section class="game-ui" data-game-ui>
-        <button data-open-menu>Menu</button>
         <div>⏱ <span data-current-seconds>0</span></div>
 
         <div>
@@ -197,6 +196,10 @@
         </div>
         <div class="game-score none">
           <p>⏱ <strong data-level-duration>0</strong> seconds</p>
+          <span
+            style="margin-top: -16px; margin-bottom: 16px;"
+            data-level-message
+          ></span>
 
           <div style="margin-top: 12px;">
             <button class="button-secondary" data-restart-level-button>

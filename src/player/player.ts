@@ -18,7 +18,7 @@ export function createPlayer(world) {
     isOnFloor: false,
     isJumping: false,
     isRewinding: false,
-    totalAmountOfMagicPlatforms: 1,
+    totalAmountOfMagicPlatforms: 0,
     canRewind() {
       return this.isJumping;
     },

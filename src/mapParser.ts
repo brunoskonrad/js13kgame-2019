@@ -12,7 +12,7 @@ export type MapPieces = {
 export const NOTHING_TYPE = 0;
 export const PLATFORM_TYPE = 1;
 
-export function parseMap(rawMap: string) {
+export function parseMap(rawMap: string): MapPieces[] {
   const lines = rawMap.trim().split("\n");
   let pieces = [];
 

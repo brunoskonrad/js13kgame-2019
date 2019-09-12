@@ -100,7 +100,18 @@ class AfterLevelMenu implements MenuComponent {
   restartButton = document.querySelector("[data-restart-level-button]");
   nextLevelButton = document.querySelector("[data-next-level-button]");
 
-  init() {}
+  init() {
+    this.restartButton.addEventListener("click", this.restart);
+    this.nextLevelButton.addEventListener("click", this.nextLevel);
+  }
+
+  restart = () => {
+    Events.emit("RESTART_LEVEL");
+  };
+
+  nextLevel = () => {
+    Events.emit("NEXT_LEVEL");
+  };
 
   render() {
     this.gameScoreElement.classList.remove("none");
@@ -112,6 +123,9 @@ class AfterLevelMenu implements MenuComponent {
 
   tearDown() {
     this.gameScoreElement.classList.add("none");
+
+    this.restartButton.removeEventListener("click", this.restart);
+    this.nextLevelButton.removeEventListener("click", this.nextLevel);
   }
 }
 

@@ -1,9 +1,11 @@
 import Events from "./utils/Events";
 
 class GameUI {
-  currentTimeElement = document.querySelector("[data-current-seconds]");
-  usedPlatformsElement = document.querySelector("[data-used-platforms]");
-  availablePlatformsElement = document.querySelector(
+  private currentTimeElement = document.querySelector("[data-current-seconds]");
+  private usedPlatformsElement = document.querySelector(
+    "[data-used-platforms]"
+  );
+  private availablePlatformsElement = document.querySelector(
     "[data-available-platforms]"
   );
 

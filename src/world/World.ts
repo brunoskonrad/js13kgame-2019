@@ -41,32 +41,6 @@ export default class World {
     this.game.menu.render();
   };
 
-  loadMap(theMap) {
-    this.restore();
-
-    const pieces = parseMap(theMap);
-
-    this.platforms = parsePlatforms(pieces);
-    this.floatyGem = createFloatyGem();
-
-    const playerPosition = pieces.find(piece => piece.tileType === 8);
-    this.player.x = playerPosition.x;
-    this.player.y = playerPosition.y;
-
-    const gemPosition = pieces.find(piece => piece.tileType === 7);
-    this.floatyGem.x = gemPosition.x + 6;
-    this.floatyGem.y = gemPosition.y + 6;
-
-    const collectableMagicPlatformPositions = pieces.filter(
-      piece => piece.tileType === 2
-    );
-    collectableMagicPlatformPositions.forEach(position => {
-      this.collectableMagicPlatforms.push(
-        createCollectableMagicPlatform(position.x, position.y)
-      );
-    });
-  }
-
   get collisionElements() {
     return [...this.platforms, ...this.magicPlatforms];
   }

@@ -24,6 +24,8 @@ export function createPlayer(world) {
     },
     rewindPosition: null,
     rewinder: new Rewind(this),
+    jumpStartTime: 0,
+    jumpKeyPressed: false,
     init() {
       Events.on("MAGIC_PLATFORM_COLLECTED", () => {
         this.totalAmountOfMagicPlatforms++;
@@ -38,9 +40,10 @@ export function createPlayer(world) {
     },
     jump() {
       if (this.isOnFloor && !this.isJumping) {
+        this.jumpStartTime = Date.now();
         this.isOnFloor = false;
         this.isJumping = true;
-        this.dy = -8;
+        this.dy = -5;
 
         this.rewinder.clear();
       }
@@ -81,6 +84,14 @@ export function createPlayer(world) {
       }
 
       handlePlayerInput(this);
+
+      if (
+        this.isJumping &&
+        this.jumpKeyPressed &&
+        Date.now() - this.jumpStartTime < 200
+      ) {
+        this.dy -= 0.3;
+      }
 
       if (this.canRewind()) {
         this.rewinder.add(this.x, this.y);

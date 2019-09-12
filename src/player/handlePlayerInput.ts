@@ -2,7 +2,10 @@ import { keyPressed } from "kontra/src/keyboard";
 
 export function handlePlayerInput(player) {
   if (keyPressed("space") || keyPressed("up")) {
+    player.jumpKeyPressed = true;
     player.jump();
+  } else {
+    player.jumpKeyPressed = false;
   }
 
   if (keyPressed("right")) {

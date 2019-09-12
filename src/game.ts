@@ -11,7 +11,7 @@ import Highscore from "./utils/Highscore";
 
 export default class Game {
   world: World = new World(this);
-  menu: Menu = new Menu();
+  menu: Menu;
   ui: GameUI = new GameUI();
   levels: LevelsOrder = new LevelsOrder(this.world);
   gameLoop: any;
@@ -20,6 +20,7 @@ export default class Game {
   gameIsRunning: boolean = false;
 
   constructor() {
+    this.menu = new Menu(this);
     this.menu.render();
 
     this.ui.availablePlatforms = this.world.player.totalAmountOfMagicPlatforms;
@@ -28,6 +29,7 @@ export default class Game {
     Events.on("RESTART_LEVEL", this.restartLevel);
     Events.on("NEXT_LEVEL", this.nextLevel);
     Events.on("FLOATY_GEM_COLLECTED", this.endLevel);
+    Events.on("OPEN_GAME_MENU", this.openGameMenu);
 
     document.addEventListener("keypress", this.handleKeyPress);
   }
@@ -38,8 +40,18 @@ export default class Game {
     }
   };
 
+  get listOfLevels() {
+    const listOfCompletedLevels = this.highscore.completedLevels;
+
+    return this.levels.levels.map(level => ({
+      levelNumber: level.levelNumber,
+      isCompleted: listOfCompletedLevels.includes(level.levelNumber)
+    }));
+  }
+
   start = () => {
     if (this.gameIsRunning) {
+      this.renderGame();
       return;
     }
 
@@ -102,12 +114,13 @@ export default class Game {
     this.menu.hide();
   }
 
-  renderMenu() {
-    getCanvas().classList.add("hidden");
-  }
-
   updateGameUI() {
     this.ui.availablePlatforms = this.world.player.totalAmountOfMagicPlatforms;
     this.ui.usedPlatforms = 0;
   }
+
+  openGameMenu = () => {
+    this.menu.state = "game-instructions";
+    this.menu.render();
+  };
 }

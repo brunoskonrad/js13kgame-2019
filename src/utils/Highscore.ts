@@ -31,7 +31,7 @@ class Highscore {
   }
 
   get completedLevels() {
-    return Object.keys(this.data);
+    return Object.keys(this.data).map(Number);
   }
 }
 

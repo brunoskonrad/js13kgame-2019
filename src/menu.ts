@@ -1,16 +1,18 @@
 import Events from "./utils/Events";
 import Timer from "./utils/Timer";
+import Game from "./game";
 
 type MenuState = "game-instructions" | "game-score";
 
 class Menu {
+  game: Game;
   menuElement = document.querySelector("[data-game-menu]");
   internalState: MenuState = "game-instructions";
   menuComponent: MenuComponent = new GameInfoMenu();
   isVisible: boolean = true;
 
-  constructor() {
-    this.menuComponent.init();
+  constructor(game: Game) {
+    this.menuComponent.init(game);
   }
 
   get state() {
@@ -18,10 +20,6 @@ class Menu {
   }
 
   set state(nextState: MenuState) {
-    if (nextState === this.internalState) {
-      return;
-    }
-
     this.internalState = nextState;
     this.menuComponent.tearDown();
 
@@ -32,7 +30,7 @@ class Menu {
       this.menuComponent = new AfterLevelMenu();
     }
 
-    this.menuComponent.init();
+    this.menuComponent.init(this.game);
   }
 
   hide() {
@@ -45,13 +43,13 @@ class Menu {
     this.menuElement.classList.remove("hidden");
     this.isVisible = true;
 
-    this.menuComponent.init();
+    this.menuComponent.init(this.game);
     this.menuComponent.render();
   }
 }
 
 interface MenuComponent {
-  init(): void;
+  init(game: Game): void;
   render(): void;
   tearDown(): void;
 }
@@ -61,8 +59,10 @@ class GameInfoMenu implements MenuComponent {
 
   gameInstructionsElement = document.querySelector(".game-instructions");
   button = document.querySelector("[data-start-game-button]");
+  levelsListContainer = document.querySelector("[data-levels-container]");
+  levelsList = document.querySelector("[data-levels-list]");
 
-  init() {
+  init(game: Game) {
     if (this.mounted) {
       return;
     }
@@ -70,6 +70,27 @@ class GameInfoMenu implements MenuComponent {
     this.button.addEventListener("click", this.onStartButtonClick);
     document.addEventListener("keypress", this.onSpaceBarPressDown);
     this.mounted = true;
+
+    const { listOfLevels } = game;
+
+    if (listOfLevels.find(level => level.isCompleted)) {
+      this.levelsList.innerHTML = "";
+
+      listOfLevels
+        .filter(level => level.isCompleted)
+        .forEach(level => {
+          const button = document.createElement("button");
+
+          button.innerHTML = level.levelNumber.toString();
+          button.classList.add("button-small");
+          button.dataset["level"] = level.levelNumber.toString();
+
+          this.levelsList.appendChild(button);
+        });
+
+      this.levelsListContainer.classList.remove("none");
+      this.button.innerHTML = "Continue";
+    }
   }
 
   onSpaceBarPressDown = event => {

@@ -7,7 +7,7 @@ const LEVELS_LIST_IN_ORDER = [LevelOne, LevelTwo];
 
 class LevelsOrder {
   private currentLevelIndex = 0;
-  private levels: BaseLevel[];
+  levels: BaseLevel[];
 
   constructor(world: World) {
     this.levels = LEVELS_LIST_IN_ORDER.map(LevelClass => new LevelClass(world));

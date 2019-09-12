@@ -102,6 +102,19 @@
         background-color: #ff784f;
       }
 
+      button:disabled {
+        background-color: #c1c1c1;
+      }
+
+      button:disabled:hover {
+        background-color: #c1c1c1;
+        cursor: not-allowed;
+      }
+
+      button:disabled:active {
+        background-color: #c1c1c1;
+      }
+
       .button-secondary {
         background-color: transparent;
         text-decoration: underline;
@@ -116,8 +129,17 @@
         background-color: transparent;
       }
 
+      .button-small {
+        padding: 4px 8px;
+      }
+
+      [data-levels-list] > * {
+        margin-right: 8px;
+      }
+
       .hidden {
         opacity: 0;
+        pointer-events: none;
       }
 
       .none {
@@ -129,6 +151,7 @@
     <section class="container">
       <canvas class="my-game" width="1280" height="800"></canvas>
       <section class="game-ui" data-game-ui>
+        <button data-open-menu>Menu</button>
         <div>⏱ <span data-current-seconds>0</span></div>
 
         <div>
@@ -160,6 +183,17 @@
           <span style="margin-left: 12px;"
             >or press <strong>space</strong></span
           >
+
+          <div class="none" style="margin-top: 12px;" data-levels-container>
+            <p>Try them again:</p>
+
+            <div data-levels-list>
+              <button class="button-small">1</button>
+              <button class="button-small">2</button>
+              <button class="button-small">3</button>
+              <button class="button-small" disabled="disabled">4</button>
+            </div>
+          </div>
         </div>
         <div class="game-score none">
           <p>⏱ <strong data-level-duration>0</strong> seconds</p>
